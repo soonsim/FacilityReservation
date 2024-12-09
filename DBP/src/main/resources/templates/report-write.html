@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>신고 작성</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 400px;
+        margin: auto;
+    }
+    label {
+        font-weight: bold;
+    }
+    textarea {
+        resize: none;
+        height: 100px;
+        padding: 10px;
+    }
+    button {
+        padding: 10px;
+        border: none;
+        background-color: #1d72b8;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #155a8a;
+    }
+  </style>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+<div class="container">
+  <h1>신고 작성</h1>
+  <form th:action="@{/report/submit}" method="post">
+
+    <!-- 예약 번호 드롭다운 리스트 -->
+    <label for="reservationId">예약 번호</label>
+    <select id="reservationId" name="reservationId" required>
+      <option value="" disabled selected>예약 번호 선택</option>
+      <tr th:each="reservation : ${reservations}">
+        <option th:value="${reservation.reservationId}" th:text="${reservation.reservationId}">예약 번호</option>
+      </tr>
+    </select>
+
+    <label for="reportContent">신고 내용</label>
+    <textarea id="reportContent" name="reportContent" placeholder="신고 내용을 작성하세요" required></textarea>
+
+    <button type="submit">신고 제출</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <nav style="
+        background-color: white;
+        display: flex;
+        align-items: center;
+        padding: 15px 50px; /* 네비게이션 바의 양쪽 여백 */
+        border-bottom: 1px solid #ddd;"> <!-- 하단 경계선 -->
+
+        <!-- 로고 -->
+        <img src="/images/logo.PNG" alt="Logo" style="height: 60px;">
+
+        <!-- 버튼 그룹 -->
+        <div style="
+            margin-left: auto; /* 로고와 버튼 그룹 간의 간격 확보 */
+            padding-left: 150px; /* 버튼 그룹 왼쪽 여백 */
+            display: flex;
+            gap: 300px;">
+            <a href="/" style="
+                color: black;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;">홈</a>
+            <a href="/facilities/search" style="
+                color: black;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;">검색</a>
+            <a href="/reservations" style="
+                color: black;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;">예약</a>
+            <a href="/report" style="
+                color: black;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;">신고</a>
+        </div>
+
+        <!-- 로그인/로그아웃 버튼 -->
+        <div style="
+            margin-left: auto; /* 버튼이 우측으로 정렬되도록 설정 */
+            display: flex;
+            align-items: center;">
+            <!-- 로그인 상태에 따라 표시 -->
+            <a th:if="${#authentication == null}" href="/auth/login" style="
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;">로그인</a>
+            <form th:if="${#authentication != null}" th:action="@{/auth/logout}" method="post" style="margin: 0;">
+                <button type="submit" style="
+                    padding: 10px 20px;
+                    background-color: #FF4136;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;">로그아웃</button>
+            </form>
+        </div>
+    </nav>
+</div>

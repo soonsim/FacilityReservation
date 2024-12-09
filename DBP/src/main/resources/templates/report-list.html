@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>신고 관리</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .report-box {
+            max-height: 400px;  /* 박스의 최대 높이 */
+            overflow-y: auto;   /* 내용이 넘치면 스크롤 */
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            border: none;
+            color: white;
+            background-color: #1d72b8;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #155a8a;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+<div class="container">
+    <h1>신고 관리</h1>
+    <div class="report-box">
+        <table>
+            <thead>
+            <tr>
+                <th>신고 번호</th>
+                <th>예약 번호</th>
+                <th>처리 현황</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report : ${reports}">
+                <td th:text="${report.reportId}">신고 번호</td>
+                <td th:text="${report.reservationId}">예약 번호</td>
+                <td th:text="${report.processingStatus}">처리 현황</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn" href="/report/write">신고 작성</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <title>시설 검색</title>
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .btn {
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        background-color: #007bff;
+        border-radius: 3px;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+<h1>시설 검색</h1>
+<form th:action="@{/facilities/search}" method="get">
+  <label for="facilityId">시설 번호:</label>
+  <input type="text" id="facilityId" name="facilityId" placeholder="시설 번호 입력">
+
+  <label for="location">시설 이름:</label>
+  <input type="text" id="location" name="location">
+
+  <label for="date">날짜:</label>
+  <input type="date" id="date" name="date">
+
+  <label for="startTime">시작 시간:</label>
+  <select id="startTime" name="startTime">
+    <option value="">선택</option>
+    <option value="8">08시</option>
+    <option value="9">09시</option>
+    <option value="10">10시</option>
+    <option value="11">11시</option>
+    <option value="12">12시</option>
+    <option value="13">13시</option>
+    <option value="14">14시</option>
+    <option value="15">15시</option>
+    <option value="16">16시</option>
+    <option value="17">17시</option>
+    <option value="18">18시</option>
+    <option value="19">19시</option>
+    <option value="20">20시</option>
+    <option value="21">21시</option>
+    <option value="22">22시</option>
+  </select>
+
+  <label for="endTime">종료 시간:</label>
+  <select id="endTime" name="endTime">
+    <option value="">선택</option>
+    <option value="9">09시</option>
+    <option value="10">10시</option>
+    <option value="11">11시</option>
+    <option value="12">12시</option>
+    <option value="13">13시</option>
+    <option value="14">14시</option>
+    <option value="15">15시</option>
+    <option value="16">16시</option>
+    <option value="17">17시</option>
+    <option value="18">18시</option>
+    <option value="19">19시</option>
+    <option value="20">20시</option>
+    <option value="21">21시</option>
+    <option value="22">22시</option>
+    <option value="23">23시</option>
+  </select>
+
+  <button type="submit">검색</button>
+</form>
+<br>
+<table>
+  <thead>
+  <tr>
+    <th>시설 번호</th>
+    <th>시설 이름</th>
+    <th>위치</th>
+    <th>수용 인원</th>
+    <th>예약 가능 여부</th>
+    <th>예약 누적 횟수</th>
+    <th>상세 보기</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="facility : ${facilities}">
+
+    <td th:text="${facility.facilityId}">시설 번호</td>
+    <!-- 시설 이름: location 표시 -->
+    <td th:text="${facility.location}">시설 이름</td>
+
+    <!-- 위치: facilityName 표시 -->
+    <td th:text="${facility.facilityName}">위치</td>
+
+    <!-- 수용 인원 -->
+    <td th:text="${facility.capacity} + '명'">수용 인원</td>
+
+    <!-- 예약 가능 여부 -->
+    <td th:text="${facility.available ? '가능' : '불가능'}">예약 가능 여부</td>
+
+    <!-- 예약 누적 횟수 -->
+    <td th:text="${facility.reservationCount != null ? facility.reservationCount + '회' : '0회'}">예약 누적 횟수</td>
+
+    <!-- 상세 보기 버튼 -->
+    <td>
+      <button class="btn" th:onclick="'location.href=\'/facilities/details?facilityId=' + ${facility.facilityId} + '\';'">보기</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

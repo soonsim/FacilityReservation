@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 관리</title>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            padding: 20px;
+            margin-left: 50px; /* 왼쪽 여백 추가 */
+        }
+        .reservation-form, .reservation-list {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-height: 700px;
+        }
+        .reservation-list {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px; /* 섹션과 제목 간격 추가 */
+            font-size: 24px;
+            text-align: center;
+        }
+        .sticky-header {
+    position: sticky; /* 부모 컨테이너 내에서 고정 */
+    top: 0; /* 상단에 고정 */
+    background-color: white; /* 배경색 추가 (스크롤 시 텍스트 가독성 유지) */
+    z-index: 1; /* 다른 요소 위에 표시되도록 설정 */
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 1px solid #ddd; /* 구분선 */
+}
+
+.table-container {
+    max-height: 600px; /* 표 컨테이너 높이 제한 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+    margin-top: 10px; /* 제목과 표 간격 */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        #calendar-container {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .flatpickr-calendar {
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+<h1>예약 관리</h1>
+
+<div class="container">
+    <!-- 새 예약 추가 섹션 -->
+    <div class="reservation-form">
+        <h2>새 예약 추가</h2>
+        <!-- 항상 표시되는 캘린더 -->
+        <div id="calendar-container">
+            <h3>예약 날짜 선택</h3>
+            <input type="text" id="calendar" placeholder="날짜를 선택하세요" readonly>
+        </div>
+
+        <form id="reservationForm" th:action="@{/reservations/add}" method="post">
+            <label for="facility">시설 선택:</label>
+            <select id="facility" name="facility.facilityId" required>
+                <option th:each="facility : ${facilities}" th:value="${facility.facilityId}" th:text="${facility.location}">시설 위치</option>
+            </select><br><br>
+
+            <input type="hidden" id="selectedDate" name="reservationDate" required>
+
+            <label for="startTime">시작 시간:</label>
+            <select id="startTime" name="startTime" required>
+                <option value="8">08시</option>
+                <option value="9">09시</option>
+                <option value="10">10시</option>
+                <option value="11">11시</option>
+                <option value="12">12시</option>
+                <option value="13">13시</option>
+                <option value="14">14시</option>
+                <option value="15">15시</option>
+                <option value="16">16시</option>
+                <option value="17">17시</option>
+                <option value="18">18시</option>
+                <option value="19">19시</option>
+                <option value="20">20시</option>
+                <option value="21">21시</option>
+                <option value="22">22시</option>
+                <option value="23">23시</option>
+                <option value="24">24시</option>
+            </select><br><br>
+
+            <label for="endTime">종료 시간:</label>
+            <select id="endTime" name="endTime" required>
+                <option value="9">09시</option>
+                <option value="10">10시</option>
+                <option value="11">11시</option>
+                <option value="12">12시</option>
+                <option value="13">13시</option>
+                <option value="14">14시</option>
+                <option value="15">15시</option>
+                <option value="16">16시</option>
+                <option value="17">17시</option>
+                <option value="18">18시</option>
+                <option value="19">19시</option>
+                <option value="20">20시</option>
+                <option value="21">21시</option>
+                <option value="22">22시</option>
+                <option value="23">23시</option>
+                <option value="24">24시</option>
+            </select><br><br>
+
+            <button type="submit">예약</button>
+        </form>
+    </div>
+
+    <div class="reservation-list">
+        <h2 class="sticky-header">내 예약 현황</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>시설번호</th>
+                    <th>예약일</th>
+                    <th>시작 시간</th>
+                    <th>종료 시간</th>
+                    <th>수정/취소</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.facilityId != null ? reservation.facilityId: '정보 없음'}">시설번호</td>
+                    <td th:text="${reservation.formattedDate}">예약일</td>
+                    <td th:text="${reservation.startTime + '시'}">시작 시간</td>
+                    <td th:text="${reservation.endTime + '시'}">종료 시간</td>
+                    <td>
+                        <div class="action-buttons"
+                             th:if="${reservation.reservationDate.isAfter(T(java.time.LocalDate).now())}">
+                            <a th:href="@{/reservations/edit(reservationId=${reservation.reservationId})}">
+                                <button class="edit">수정</button>
+                            </a>
+                            <button class="cancel" th:data-id="${reservation.reservationId}" onclick="cancelReservation(this)">취소</button>
+                        </div>
+                        <span class="completed"
+                              th:if="${reservation.reservationDate.isBefore(T(java.time.LocalDate).now()) or reservation.reservationDate.isEqual(T(java.time.LocalDate).now())}">완료</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Flatpickr 캘린더 초기화
+    flatpickr("#calendar", {
+        inline: true,
+        onChange: function (selectedDates, dateStr, instance) {
+            const today = new Date();
+            const selectedDate = new Date(selectedDates[0]);
+            if (selectedDate < today.setHours(0, 0, 0, 0)) {
+                alert("이전 날짜는 선택할 수 없습니다.");
+                document.getElementById("selectedDate").value = ""; // 유효하지 않은 날짜 초기화
+                return;
+            }
+            document.getElementById("selectedDate").value = dateStr; // 유효한 날짜 업데이트
+        }
+    });
+
+    // 폼 제출 시 추가 검증
+    document.getElementById("reservationForm").addEventListener("submit", function (event) {
+        const selectedDate = document.getElementById("selectedDate").value;
+        if (!selectedDate) {
+            alert("유효한 예약 날짜를 선택하세요.");
+            event.preventDefault();
+        }
+    });
+
+    // 시작 시간에 따라 종료 시간 제한
+    document.getElementById('startTime').addEventListener('change', function () {
+        const startTime = parseInt(this.value);
+        const endTimeSelect = document.getElementById('endTime');
+
+        Array.from(endTimeSelect.options).forEach((option) => {
+            option.disabled = parseInt(option.value) <= startTime;
+        });
+    });
+
+    function cancelReservation(button) {
+        const reservationId = button.getAttribute('data-id');
+
+        if (!reservationId) {
+            alert('예약 ID를 가져올 수 없습니다.');
+            return;
+        }
+
+        if (confirm('정말로 예약을 취소하시겠습니까?')) {
+            fetch('/reservations/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `reservationId=${reservationId}`
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('예약이 취소되었습니다.');
+                    location.reload();
+                } else {
+                    alert('예약 취소에 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('에러가 발생했습니다.');
+            });
+        }
+    }
+</script>
+</body>
+</html>
