@@ -1,0 +1,1068 @@
+--------------------------------------------------------
+ -- Database
+--------------------------------------------------------
+DROP TABLE "MANAGEMENT" CASCADE CONSTRAINTS;
+DROP TABLE "FACILITY" CASCADE CONSTRAINTS;
+DROP TABLE "REPORT" CASCADE CONSTRAINTS;
+DROP TABLE "RESERVATION" CASCADE CONSTRAINTS;
+DROP TABLE "DEPARTMENT" CASCADE CONSTRAINTS;
+DROP TABLE "STUDENT" CASCADE CONSTRAINTS;
+
+--------------------------------------------------------
+--  DDL for Table MANAGEMENT_LOG
+--------------------------------------------------------
+
+CREATE TABLE "MANAGEMENT" 
+   (	"FACILITY_ID" NUMBER(*,0), 
+	"DATE" DATE, 
+	"MANAGER" VARCHAR2(100 BYTE)
+   ) ;
+
+--------------------------------------------------------
+--  DDL for Table FACILITY
+--------------------------------------------------------
+
+CREATE TABLE "FACILITY" 
+   (	"FACILITY_ID" NUMBER(*,0), 
+	"FACILITY_NAME" VARCHAR2(100 BYTE), 
+	"CAPACITY" NUMBER(*,0), 
+	"LOCATION" VARCHAR2(255 BYTE), 
+	"USAGE_GUIDELINES" CLOB, 
+	"AVAILABLE_START_TIME" NUMBER(*,0), 
+	"AVAILABLE_END_TIME" NUMBER(*,0), 
+	"DEPARTMENT_ID" NUMBER(*,0)
+   ) ;
+
+--------------------------------------------------------
+--  DDL for Table REPORT_HISTORY
+--------------------------------------------------------
+
+CREATE TABLE "REPORT" 
+   (	"RESERVATION_ID" VARCHAR2(25 BYTE), 
+	"REPORT_ID" NUMBER(*,0), 
+	"REPORT_CONTENT" CLOB, 
+	"PROCESSING_STATUS" VARCHAR2(100 BYTE)
+   ) ;
+
+--------------------------------------------------------
+--  DDL for Table RESERVATION_HISTORY
+--------------------------------------------------------
+
+CREATE TABLE "RESERVATION" 
+   (	"STUDENT_ID" NUMBER(*,0), 
+	"FACILITY_ID" NUMBER(*,0), 
+	"RESERVATION_ID" VARCHAR2(25 BYTE), 
+	"RESERVATION_DATE" DATE, 
+	"START_TIME" NUMBER(2,0),
+    "END_TIME" NUMBER(2,0)
+   ) ;
+
+--------------------------------------------------------
+--  DDL for Table DEPARTMENT
+--------------------------------------------------------
+
+CREATE TABLE "DEPARTMENT" 
+   (	"DEPARTMENT_ID" NUMBER(*,0), 
+	"DEPARTMENT_NAME" VARCHAR2(100 BYTE), 
+	"PHONE_NUMBER" VARCHAR2(20 BYTE), 
+	"OFFICE" VARCHAR2(100 BYTE)
+   ) ;
+
+--------------------------------------------------------
+--  DDL for Table STUDENT
+--------------------------------------------------------
+
+CREATE TABLE "STUDENT" 
+   (	"STUDENT_ID" NUMBER(*,0), 
+	"NAME" VARCHAR2(100 BYTE), 
+	"GENDER" CHAR(1 BYTE), 
+	"CONTACT_NUMBER" VARCHAR2(20 BYTE), 
+	"DEPARTMENT_ID" NUMBER(*,0)
+   ) ;
+
+REM INSERTING into "MANAGEMENT"
+SET DEFINE OFF;
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (1,to_date('24/03/01','RR/MM/DD'),'김철수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (2,to_date('24/03/02','RR/MM/DD'),'이영희');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (3,to_date('24/03/05','RR/MM/DD'),'박민수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (4,to_date('24/03/06','RR/MM/DD'),'최민호');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (5,to_date('24/03/09','RR/MM/DD'),'정수연');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (6,to_date('24/03/10','RR/MM/DD'),'오지훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (7,to_date('24/03/12','RR/MM/DD'),'한가영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (8,to_date('24/03/15','RR/MM/DD'),'김하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (9,to_date('24/03/16','RR/MM/DD'),'이준호');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (10,to_date('24/03/18','RR/MM/DD'),'박지훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (11,to_date('24/03/20','RR/MM/DD'),'김수정');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (12,to_date('24/03/23','RR/MM/DD'),'이민우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (13,to_date('24/03/25','RR/MM/DD'),'박소영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (14,to_date('24/03/27','RR/MM/DD'),'한지민');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (15,to_date('24/03/29','RR/MM/DD'),'정유진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (16,to_date('24/03/30','RR/MM/DD'),'오세훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (17,to_date('24/04/01','RR/MM/DD'),'한수지');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (18,to_date('24/04/03','RR/MM/DD'),'김정훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (19,to_date('24/04/05','RR/MM/DD'),'이상희');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (20,to_date('24/04/07','RR/MM/DD'),'박민경');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (21,to_date('24/04/09','RR/MM/DD'),'최수진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (22,to_date('24/04/11','RR/MM/DD'),'정지훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (23,to_date('24/04/13','RR/MM/DD'),'오하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (24,to_date('24/04/15','RR/MM/DD'),'한유진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (25,to_date('24/04/17','RR/MM/DD'),'김도훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (26,to_date('24/04/19','RR/MM/DD'),'이서현');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (27,to_date('24/04/21','RR/MM/DD'),'박시우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (28,to_date('24/04/23','RR/MM/DD'),'최유정');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (29,to_date('24/04/25','RR/MM/DD'),'정하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (30,to_date('24/04/27','RR/MM/DD'),'오민수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (31,to_date('24/04/29','RR/MM/DD'),'한지우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (32,to_date('24/05/01','RR/MM/DD'),'김민수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (33,to_date('24/05/03','RR/MM/DD'),'이유진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (34,to_date('24/05/05','RR/MM/DD'),'박지수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (35,to_date('24/05/07','RR/MM/DD'),'최정우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (36,to_date('24/05/09','RR/MM/DD'),'정수빈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (37,to_date('24/05/11','RR/MM/DD'),'오준영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (38,to_date('24/05/13','RR/MM/DD'),'한지민');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (39,to_date('24/05/15','RR/MM/DD'),'김수현');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (40,to_date('24/05/17','RR/MM/DD'),'이하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (41,to_date('24/05/19','RR/MM/DD'),'박재영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (42,to_date('24/05/21','RR/MM/DD'),'최수연');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (43,to_date('24/05/23','RR/MM/DD'),'정준호');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (44,to_date('24/05/25','RR/MM/DD'),'오정우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (45,to_date('24/05/27','RR/MM/DD'),'한유리');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (46,to_date('24/05/29','RR/MM/DD'),'김유진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (47,to_date('24/05/31','RR/MM/DD'),'이정훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (48,to_date('24/06/02','RR/MM/DD'),'박수진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (49,to_date('24/06/03','RR/MM/DD'),'최윤석');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (50,to_date('24/06/04','RR/MM/DD'),'정지훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (51,to_date('24/06/05','RR/MM/DD'),'오하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (52,to_date('24/06/06','RR/MM/DD'),'한수진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (53,to_date('24/06/07','RR/MM/DD'),'김도윤');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (54,to_date('24/06/08','RR/MM/DD'),'이서연');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (55,to_date('24/06/09','RR/MM/DD'),'박시현');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (56,to_date('24/03/04','RR/MM/DD'),'최유나');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (57,to_date('24/03/07','RR/MM/DD'),'정하영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (58,to_date('24/03/08','RR/MM/DD'),'오민호');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (59,to_date('24/03/11','RR/MM/DD'),'한지우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (60,to_date('24/03/13','RR/MM/DD'),'김현수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (61,to_date('24/03/14','RR/MM/DD'),'이유빈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (62,to_date('24/03/17','RR/MM/DD'),'박지우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (63,to_date('24/03/19','RR/MM/DD'),'최재영');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (64,to_date('24/03/21','RR/MM/DD'),'정수연');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (65,to_date('24/03/22','RR/MM/DD'),'오준희');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (66,to_date('24/03/24','RR/MM/DD'),'한지민');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (67,to_date('24/03/26','RR/MM/DD'),'김수연');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (68,to_date('24/03/28','RR/MM/DD'),'이하나');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (69,to_date('24/03/31','RR/MM/DD'),'박재민');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (70,to_date('24/04/02','RR/MM/DD'),'최지우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (71,to_date('24/04/04','RR/MM/DD'),'정윤수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (72,to_date('24/04/06','RR/MM/DD'),'오수민');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (73,to_date('24/04/08','RR/MM/DD'),'한유진');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (74,to_date('24/04/10','RR/MM/DD'),'김도훈');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (75,to_date('24/04/12','RR/MM/DD'),'이서현');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (76,to_date('24/04/14','RR/MM/DD'),'박시우');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (77,to_date('24/04/16','RR/MM/DD'),'최유정');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (78,to_date('24/04/18','RR/MM/DD'),'정하늘');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (79,to_date('24/04/20','RR/MM/DD'),'오민수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (80,to_date('24/04/22','RR/MM/DD'),'임정서');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (81,to_date('24/04/24','RR/MM/DD'),'윤지수');
+Insert into "MANAGEMENT" ("FACILITY_ID","DATE","MANAGER") values (82,to_date('24/04/26','RR/MM/DD'),'박도겸');
+REM INSERTING into "FACILITY"
+SET DEFINE OFF;
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (1, '법정관', 20, '휴게실',
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,145);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (2, '법정관', 20, '정독실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,145);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (3, '법정관', 20, '정보검색실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 9,17,145);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (4, '법정관', 20, 'PRIME 학습실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,145);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (5, '국제관', 20, '학습실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,149);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (6, '국제관', 500, '석당아트홀', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+특수장비(무대전동기기, 특수음향 등)를 사용은 사용 3일전 사용가능여부를     확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구     또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게     있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용     제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,149);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (7, '국제관', 2000,'효민갤러리', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+전시에 필요한 추가설치 자재(집기비품, 특수조명 등)은 행사종료 시 모두 철거합니다.
+전시물의 설치는 현재 준비되어 있는 보조물을 사용하여 설치함을 원칙으로 하며 못, 비스, 압정, 타카 등의 사용은 일체 불가하다.
+무빙월(이동칸막이)은 사용 후 모두 원위치(무빙월 룸)시킨다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구     또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게     있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용      제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,152);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (8, '국제관', 40, '소통회의실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,152);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (9, '상영관', 150, '소강당', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+특수장비(무대전동기기, 특수음향 등)를 사용은 사용 3일전 사용가능여부를     확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구     또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게     있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용     제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,106);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (10, '수덕전', 200, '학생식당', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,105);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (11, '수덕전', 50, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,105);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (12, '수덕전', 1500, '대강당', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+특수장비(무대전동기기, 특수음향 등)를 사용은 사용 3일전 사용가능여부를     확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구     또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게     있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용     제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,105);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (13, '제1인문관', 30, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,104);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (14, '제1인문관', 40, '세미나실',
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,104);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (15, '제1인문관', 50, '콜라보학습실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,104);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (16, '제2인문관', 20, '세미나실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,103);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (17, '효민체육관', 50, '무용실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+시설물 이용자는 반드시 규정된 실내전용 운동화 착용하여야 합니다.
+체육(각종넷트, 농구대 등)기구는 관리자의 안내를 받아 자가 설치 및 철거를 원칙으로 합니다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (18, '효민체육관', 50, '체조실', 
+'행사장 내 음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+행사 진행간 발생한 시설물 내 안전사고 책임은 사용자에게 있음',9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (19, '효민체육관', 100, '농구실', 
+'행사장 내 음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+행사 진행간 발생한 시설물 내 안전사고 책임은 사용자에게 있음', 9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (20, '효민체육관', 150, '배드민턴장', 
+'행사장 내 음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+행사 진행간 발생한 시설물 내 안전사고 책임은 사용자에게 있음',9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (21, '효민체육관', 200, '배구장', 
+'행사장 내 음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+행사 진행간 발생한 시설물 내 안전사고 책임은 사용자에게 있음', 9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (22, '효민체육관', 200, '핸드볼장', 
+'행사장 내 음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+행사 진행간 발생한 시설물 내 안전사고 책임은 사용자에게 있음',9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (23, '효민체육관', 20, '샤워장', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 9,17,102);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (24, '중앙도서관', 100, '일반열람실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (25, '중앙도서관', 200, '석당콜라보라운지', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (26, '중앙도서관', 200, 'D-라운지', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (27, '중앙도서관', 250, '대출실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (28, '중앙도서관', 100, '북카페', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (29, '중앙도서관', 50, '정기간행물실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (30, '중앙도서관', 50, '참고자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (31, '중앙도서관', 50, '수험서자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (32, '중앙도서관', 30, 'UN자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (33, '중앙도서관', 50, '사회과학자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (34, '중앙도서관', 50, '예술자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (35, '중앙도서관', 50, '자연기술과학자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (36, '중앙도서관', 50, '어문학자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (37, '중앙도서관', 50, '인문과학자료실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (38, '중앙도서관', 50, '옥외휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (39, '중앙도서관', 50, '일반열람실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',  6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (40, '중앙도서관', 50, '대학원열람실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',  6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (41, '중앙도서관', 30, '노트북룸', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',  6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (42, '중앙도서관', 30, '스터디룸', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',  6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (43, '중앙도서관', 50, '일반열람실',
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (44, '중앙도서관', 50, '노트북룸', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (45, '중앙도서관', 150, '박물관', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',6,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (46, '중앙도서관', 150, '석당기념관', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 8,17,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (47, '의료보건관', 50, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,166);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (48, '의료보건관', 100, '세미나실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,166);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (49, '의료보건관', 20, '정독실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,166);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (50, '생활과학관', 20, '헌혈의 집', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 10,18,160);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (51, '생활과학관', 20, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,160);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (52, '창의관', 20, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,114);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (53, '창의관', 30, 'PRIME 세미나실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,114);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (54, '창의관', 20, 'PRIME 학습실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,114);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)VALUES (55, '생활과학관', 20, 'PRIME 세미나실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,120);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (56, '생활과학관', 20, 'PRIME 세미나실2', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,120);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (57, '지천관', 20, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,161);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (58, '지천관', 100, '세미나실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,161);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (59, '산학협력관', 160, 'PRIME 컨벤션 다목적홀', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (60, '산학협력관', 20, '세미나실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (61, '산학협력관', 50, 'PRIME 학습실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (62, '산학협력관', 20, '수업행동분석실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (63, '산학협력관', 20, '콜라보랩실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함',0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (64, '산학협력관', 20, '교욱혁신처 회의실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (65, '산학협력관', 20, '멀티미디어콘텐츠제작실 스튜디오1', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (66, '산학협력관', 20, '멀티미디어콘텐츠제작실 스튜디오2',
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (67, '산학협력관', 20, '콜라보 스튜디오-종합 스튜디오',
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (68, '산학협력관', 20, '콜라보 스튜디오-1인 스튜디오', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (69, '산학협력관', 20, '콜라보 스튜디오-블랙 스튜디오', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (70, '산학협력관', 20, '공명회의실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (71, '산학협력관', 20, '공명스튜디오1', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (72, '산학협력관', 20, '공명스튜디오2', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,127);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (73, '공학관', 20, '이노리움', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (74, '공학관', 20, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (75, '공학관', 100, '세미나실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (76, '공학관', 20, 'PRIME학습실', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+기자재(음향, 영상장비 등) 사용자는 행사 전 미리 기자재의 이상유무 및 사용법을 관리부서에 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구 또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게 있습니다.
+ 위 사항을 위반하거나 공공질서 및 공익상 부적절하다고 인정될 때 시설사용 제한 또는 퇴장 조치될 수도 있습니다.
+기타 시설물 사용에 문의 사항은 안전관리팀으로 문의하십시오.',0,23,101);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID)  VALUES (77, '정보공학관', 20, '학생식당', 
+'음식물 반입 불가
+시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함
+발생한 시설물 내 안전사고 책임은 사용자에게 있음', 8,17,130);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (78, '정보공학관', 20, '휴게실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,130);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (79, '정보공학관', 20, 'PRIME학습실', 
+'시설물 사용 후 정리정돈 및 청소 철저
+시설물 훼손시 지체없이 시설물 담당자에게 통보하고 반드시 원상회복 하여야 함', 0,23,130);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (80, '야외음악당',3000, '야외음악당', 
+'시설물 사용신청서에 명시된 사용일시를 준수하여 사용하십시오.
+실내 흡연금지 및 음식물 반입금지, 애완동물 출입을 금지합니다.
+실내 냉·난방 운영은 학교 냉·난방 운영 기준에 의해 사용합니다.
+특수장비(무대전동기기, 특수음향 등)를 추가설치 사용은 사용 3일전 통보하여     사전 사용가능 여부를 확인 합니다.
+사용 후 모든 시설은 원상복구 하여야 하며 발생한 쓰레기는 수거해가야 합니다.
+시설물 등이 훼손이나 파손되지 않도록 주의하고, 훼손이나 파손시 원상복구     또는 변상하여야 합니다.
+시설물 이용간 본인의 부주의로 인하여 발생한 상해 및 사고의 책임은 본인에게     있습니다.', 0,23,178);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (81, '효민축구장',1200, '효민축구장', 
+'사용단체가 1일 2회이상의 연속 사용이 불가하며, 2주 연속 신청도 불가함
+사용시간은 홀수 시간 시작 홀수시간 종료임
+우천시 사용불가함', 0,23,178);
+INSERT INTO FACILITY (FACILITY_ID,FACILITY_NAME,CAPACITY,LOCATION,USAGE_GUIDELINES,AVAILABLE_START_TIME,AVAILABLE_END_TIME,DEPARTMENT_ID) VALUES (82, '효민야구장', 1200,'효민야구장', 
+'사용단체가 1일 2회이상의 연속 사용이 불가하며, 2주 연속 신청도 불가함
+사용시간은 홀수 시간 시작 홀수시간 종료임
+우천시 사용불가함', 0,23,178);
+REM INSERTING into "REPORT"
+SET DEFINE OFF;
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-112',0,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1123',1,'환기 장치가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-125',2,'전등 스위치에서 누전이 되고 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-134',3,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-135',4,'벽에 낙서가 되있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1322',5,'책상이 부서져있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-140',6,'블라인드가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1412',7,'천장에서 물이 샙니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-1116',8,'에어컨이 동작하지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-1317',9,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-1415',10,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-1416',11,'시설물 내의 안내판들이 손상되어있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1721',12,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1722',13,'와이파이가 안됩니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1819',14,'소화기가 비치되어있지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1821',15,'컴퓨터가 안켜집니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-191',16,'책상이 부서져있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-193',17,'화재 경보기가 꺼지지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-195',18,'벽에 낙서가 되있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-1911',19,'전등 스위치에서 누전이 되고 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-2110',20,'시설물 내의 안내판들이 손상되어있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-2116',21,'소화기가 비치되어있지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-2118',22,'창문이 닫히지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-2121',23,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-221',24,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-222',25,'시설물에 쓰레기들이 방치되어 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-2210',26,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2211',27,'창문이 닫히지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2216',28,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2219',29,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-237',30,'화재 경보기가 꺼지지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-238',31,'창문이 닫히지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2416',32,'천장에서 물이 샙니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2516',33,'문이 잠기지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2517',34,'시설 벽 면에 균열이 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2518',35,'에어컨이 동작하지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-261',36,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2615',37,'시설물 내의 안내판들이 손상되어있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2617',38,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2618',39,'문이 잠기지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2619',40,'컴퓨터가 안켜집니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2620',41,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-278',42,'전등이 켜지지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2710',43,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-2717',44,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-2610',45,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-2615',46,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-2618',47,'건물 내의 엘리베이터가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-273',48,'창문이 닫히지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('592024-06-2715',49,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('702024-05-2716',50,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-05-2713',51,'소화기가 비치되어있지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-05-2816',52,'환기 장치가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-05-3013',53,'에어컨이 동작하지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-05-3112',54,'의자 등받이가 고장나있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('702024-05-3113',55,'창문이 닫히지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('622024-06-0112',56,'건물 내의 엘리베이터가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-0310',57,'시설 벽 면에 균열이 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-06-0313',58,'시설물에 쓰레기들이 방치되어 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-06-0314',59,'환기 장치가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-06-0414',60,'에어컨이 동작하지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-0414',61,'건물 내의 엘리베이터가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('622024-06-0714',62,'의자 등받이가 고장나있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('622024-06-0716',63,'전등 스위치에서 누전이 되고 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('672024-06-0716',64,'블라인드가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-06-0716',65,'소화기가 비치되어있지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-1016',66,'컴퓨터가 안켜집니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-1214',67,'전등 스위치에서 누전이 되고 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-2110',68,'와이파이가 안됩니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-2112',69,'창문이 닫히지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-2510',70,'컴퓨터가 안켜집니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-06-2514',71,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('622024-06-269',72,'시설물에 쓰레기들이 방치되어 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('712024-06-2815',73,'창문이 깨져있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-07-0211',74,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('632024-07-0213',75,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2420',76,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2422',77,'컴퓨터가 안켜집니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-251',78,'환기 장치가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-260',79,'시설물에 쓰레기들이 방치되어 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-265',80,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-268',81,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2610',82,'책상이 부서져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2619',83,'시설물 내의 안내판들이 손상되어있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2620',84,'건물 내의 엘리베이터가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-276',85,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2711',86,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2712',87,'천장에서 물이 샙니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-2714',88,'와이파이가 안됩니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-279',89,'컴퓨터가 안켜집니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-2710',90,'화재 경보기가 꺼지지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-2712',91,'창문이 깨져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-281',92,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-2810',93,'환기 장치가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-2819',94,'벽에 낙서가 되있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('82024-05-2820',95,'와이파이가 안됩니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3019',96,'문이 잠기지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3021',97,'컴퓨터가 안켜집니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-317',98,'시설물에 쓰레기들이 방치되어 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-318',99,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3110',100,'의자 등받이가 고장나있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3114',101,'창문이 깨져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3120',102,'의자 등받이가 고장나있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-05-3122',103,'화재 경보기가 꺼지지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-017',104,'건물 내의 엘리베이터가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-0122',105,'환기 장치가 고장났습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-0123',106,'시설 벽 면에 균열이 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-025',107,'책상이 부서져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-031',108,'컴퓨터가 안켜집니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-032',109,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-034',110,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-037',111,'전등 스위치에서 누전이 되고 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-0316',112,'책상이 부서져있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('122024-06-0317',113,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-05-3117',114,'창문이 닫히지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-05-3118',115,'책상이 부서져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-010',116,'시설 벽 면에 균열이 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-013',117,'천장에서 물이 샙니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-015',118,'전등 스위치에서 누전이 되고 있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0121',119,'책상이 부서져있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-023',120,'의자 등받이가 고장나있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0214',121,'시설물 내의 안내판들이 손상되어있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0215',122,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0219',123,'소화기가 비치되어있지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-035',124,'와이파이가 안됩니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-036',125,'블라인드가 고장났습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0310',126,'시설물 내의 안내판들이 손상되어있습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0311',127,'전등이 켜지지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0314',128,'창문이 닫히지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0316',129,'의자 등받이가 고장나있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0317',130,'소화기가 비치되어있지 않습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('92024-06-0318',131,'문이 잠기지 않습니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('62024-06-0416',132,'와이파이가 안됩니다.','처리 대기');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-0417',133,'시설물에 쓰레기들이 방치되어 있습니다.','처리 완료');
+INSERT INTO REPORT (RESERVATION_ID,REPORT_ID,REPORT_CONTENT,PROCESSING_STATUS) VALUES ('552024-06-0512',134,'화재 경보기가 꺼지지 않습니다.','처리 대기');
+REM INSERTING into "RESERVATION"
+SET DEFINE OFF;
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1220',to_date('24/06/12','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1221',to_date('24/06/12','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1222',to_date('24/06/12','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1223',to_date('24/06/12','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-138',to_date('24/06/13','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-139',to_date('24/06/13','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1310',to_date('24/06/13','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1311',to_date('24/06/13','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1312',to_date('24/06/13','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1313',to_date('24/06/13','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1314',to_date('24/06/13','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1315',to_date('24/06/13','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1316',to_date('24/06/13','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1317',to_date('24/06/13','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1318',to_date('24/06/13','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1319',to_date('24/06/13','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1320',to_date('24/06/13','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1321',to_date('24/06/13','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1322',to_date('24/06/13','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1323',to_date('24/06/13','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-148',to_date('24/06/14','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-149',to_date('24/06/14','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1410',to_date('24/06/14','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1411',to_date('24/06/14','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1412',to_date('24/06/14','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1413',to_date('24/06/14','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1414',to_date('24/06/14','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1415',to_date('24/06/14','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1416',to_date('24/06/14','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20240008,55,'552024-06-1417',to_date('24/06/14','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1111',to_date('24/06/11','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1112',to_date('24/06/11','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1113',to_date('24/06/11','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1114',to_date('24/06/11','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1115',to_date('24/06/11','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1116',to_date('24/06/11','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-1117',to_date('24/06/11','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210008,59,'592024-06-1317',to_date('24/06/13','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210008,59,'592024-06-1318',to_date('24/06/13','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210008,59,'592024-06-1319',to_date('24/06/13','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210002,59,'592024-06-1414',to_date('24/06/14','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210002,59,'592024-06-1415',to_date('24/06/14','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210002,59,'592024-06-1416',to_date('24/06/14','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210002,59,'592024-06-1417',to_date('24/06/14','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1713',to_date('24/06/17','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1714',to_date('24/06/17','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1715',to_date('24/06/17','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1716',to_date('24/06/17','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1717',to_date('24/06/17','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1718',to_date('24/06/17','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1719',to_date('24/06/17','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1720',to_date('24/06/17','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1721',to_date('24/06/17','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1722',to_date('24/06/17','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-188',to_date('24/06/18','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-189',to_date('24/06/18','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1810',to_date('24/06/18','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1811',to_date('24/06/18','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1812',to_date('24/06/18','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1813',to_date('24/06/18','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1814',to_date('24/06/18','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1815',to_date('24/06/18','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1816',to_date('24/06/18','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1817',to_date('24/06/18','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1818',to_date('24/06/18','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1819',to_date('24/06/18','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1820',to_date('24/06/18','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1821',to_date('24/06/18','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1822',to_date('24/06/18','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1823',to_date('24/06/18','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-197',to_date('24/06/19','RR/MM/DD'),7,8);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-198',to_date('24/06/19','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-199',to_date('24/06/19','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1910',to_date('24/06/19','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1911',to_date('24/06/19','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1912',to_date('24/06/19','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1913',to_date('24/06/19','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1914',to_date('24/06/19','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200006,55,'552024-06-1915',to_date('24/06/19','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2110',to_date('24/06/21','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2111',to_date('24/06/21','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2112',to_date('24/06/21','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2113',to_date('24/06/21','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2114',to_date('24/06/21','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2115',to_date('24/06/21','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2116',to_date('24/06/21','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2117',to_date('24/06/21','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2118',to_date('24/06/21','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2119',to_date('24/06/21','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2120',to_date('24/06/21','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2121',to_date('24/06/21','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2122',to_date('24/06/21','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2123',to_date('24/06/21','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-227',to_date('24/06/22','RR/MM/DD'),7,8);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-228',to_date('24/06/22','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-229',to_date('24/06/22','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2210',to_date('24/06/22','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2211',to_date('24/06/22','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2212',to_date('24/06/22','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2213',to_date('24/06/22','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2214',to_date('24/06/22','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2215',to_date('24/06/22','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2216',to_date('24/06/22','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2217',to_date('24/06/22','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230003,6,'62024-06-2218',to_date('24/06/22','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230005,55,'552024-06-2110',to_date('24/06/21','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230005,55,'552024-06-2111',to_date('24/06/21','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20230005,55,'552024-06-2112',to_date('24/06/21','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-229',to_date('24/06/22','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2210',to_date('24/06/22','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2211',to_date('24/06/22','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2212',to_date('24/06/22','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2213',to_date('24/06/22','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2214',to_date('24/06/22','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2215',to_date('24/06/22','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2216',to_date('24/06/22','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2217',to_date('24/06/22','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2218',to_date('24/06/22','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2219',to_date('24/06/22','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2220',to_date('24/06/22','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2221',to_date('24/06/22','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2222',to_date('24/06/22','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2223',to_date('24/06/22','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-237',to_date('24/06/23','RR/MM/DD'),7,8);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-238',to_date('24/06/23','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-239',to_date('24/06/23','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2310',to_date('24/06/23','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2311',to_date('24/06/23','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2312',to_date('24/06/23','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2313',to_date('24/06/23','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2314',to_date('24/06/23','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2315',to_date('24/06/23','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2316',to_date('24/06/23','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2317',to_date('24/06/23','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210009,55,'552024-06-2318',to_date('24/06/23','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200007,55,'552024-06-2410',to_date('24/06/24','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20200007,55,'552024-06-2411',to_date('24/06/24','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210010,55,'552024-06-2413',to_date('24/06/24','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210010,55,'552024-06-2414',to_date('24/06/24','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2720',to_date('24/05/27','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2721',to_date('24/05/27','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2722',to_date('24/05/27','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2723',to_date('24/05/27','RR/MM/DD'),23,24);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-287',to_date('24/05/28','RR/MM/DD'),7,8);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-288',to_date('24/05/28','RR/MM/DD'),8,9);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-289',to_date('24/05/28','RR/MM/DD'),9,10);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2810',to_date('24/05/28','RR/MM/DD'),10,11);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2811',to_date('24/05/28','RR/MM/DD'),11,12);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2812',to_date('24/05/28','RR/MM/DD'),12,13);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2813',to_date('24/05/28','RR/MM/DD'),13,14);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2814',to_date('24/05/28','RR/MM/DD'),14,15);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2815',to_date('24/05/28','RR/MM/DD'),15,16);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2816',to_date('24/05/28','RR/MM/DD'),16,17);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2817',to_date('24/05/28','RR/MM/DD'),17,18);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2818',to_date('24/05/28','RR/MM/DD'),18,19);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2819',to_date('24/05/28','RR/MM/DD'),19,20);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2820',to_date('24/05/28','RR/MM/DD'),20,21);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2821',to_date('24/05/28','RR/MM/DD'),21,22);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2822',to_date('24/05/28','RR/MM/DD'),22,23);
+Insert into RESERVATION (STUDENT_ID,FACILITY_ID,RESERVATION_ID,RESERVATION_DATE,START_TIME,END_TIME) values (20210005,8,'82024-05-2823',to_date('24/05/28','RR/MM/DD'),23,24);
+SET DEFINE OFF;
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (101,'기계공학과','890-1641','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (102,'로봇자동화공학과','890-2255','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (103,'자동차공학과','890-2255','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (104,'조선해양공학과','890-2590','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (105,'신소재공학과','890-2285','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (106,'고분자나노공학과','890-2285','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (107,'건축학과','890-1606','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (108,'건축공학과','890-1970','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (109,'토목공학과','890-1970','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (110,'도시공학과','890-2590','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (111,'환경공학과','890-2076','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (112,'화학공학과','890-2076','공학관 203호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (113,'응용화학과','890-1520','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (114,'의생명공학과','890-2275	','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (115,'바이오의약공학과','890-2275','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (116,'식품공학과','890-1520','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (117,'인간공학과','890-2305','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (118,'산업경영빅데이터공학과','890-2363','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (119,'제품디자인공학과','890-2305','창의관 519호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (120,'미래형자동차학과','890-3382','생활과학관 102호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (121,'컴퓨터공학과','890-1704','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (122,'컴퓨터소프트웨어공학','890-1987','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (123,'응용소프트웨어공학','890-1987','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (124,'인공지능학과','890-2176','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (125,'전기공학과','890-1674','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (126,'전자공학과','890-1674','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (127,'디지털콘텐츠학과','890-2720','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (128,'게임공학과','890-2720','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (129,'영화학과','890-2176','산학협력관 514호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (130,'소프트웨어융합학과','890-3382','생활과학관 102호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (131,'국어국문학과','890-2709','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (132,'중어중국학과','890-1222','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (133,'일본학과','890-1222','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (134,'영어영문학과','890-1222','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (135,'문헌정보학과','890-2709','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (136,'평생교육?청소년상담학과','890-1292','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (137,'심리학과','890-1292','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (138,'아동학과','890-1580','생활과학관 214호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (139,'유아교육과','890-2709','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (140,'광고홍보학','890-1310','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (141,'미디어커뮤니케이션학과','890-1310','2인문관 602호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (142,'법학과','890-2190','법정관 303호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (143,'경찰행정학과','890-2036','법정관 303호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (144,'소방방재행정학과','890-2190','법정관 303호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (145,'행정학과','890-2190','법정관 303호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (146,'사회복지학','890-203','법정관 303호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (147,'금융경영학과','890-2200','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (148,'재무부동산학과','890-2200','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (149,'무역학','890-2062','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (150,'유통물류학과','890-2200','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (151,'스마트항만물류학과','890-1404','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (152,'창업투자경영학과','890-1404','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (153,'경영학과','890-1429','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (154,'회계학과','890-1429','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (155,'경영학과','890-2062','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (156,'e비지니스학과','890-2062','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (157,'국제관광경영학과','890-2094','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (158,'호텔컨벤션경영학','890-2094','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (159,'외식경영학과','890-2094','국제관 309호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (160,'스마트호스피탈리티학과','890-3382','생활과학관 102호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (161,'스타트업창업투자학','890-1841','지천관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (162,'뷰티비즈니스학','890-1841','지천관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (163,'라이프생활문화학','890-1841','지천관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (164,'부동산투자학','890-1841','지천관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (165,'부동산개발경영학','890-1841','지천관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (166,'간호학과','890-1554, 4254','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (167,'임상병리학과','890-2680','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (168,'치위생학과','890-4236','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (169,'방사선학과','890-2675','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (170,'의료경영학과','890-4205','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (171,'물리치료학과','890-4230','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (172,'식품영양학과','890-1588','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (173,'음악학과','890-1598','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (174,'디자인조형학과','890-1342','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (175,'패션디자인학과','890-1598','의료보건관 314호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (176,'체육학과','890-1542','상경관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (177,'레저스포츠학전공','890-2210','상경관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (178,'태권도학전공','890-2210','상경관 206호');
+Insert into "DEPARTMENT" ("DEPARTMENT_ID","DEPARTMENT_NAME","PHONE_NUMBER","OFFICE") values (179,'경기지도학과','890-1542','상경관 206호');
+REM INSERTING into "STUDENT"
+SET DEFINE OFF;
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20190001,'김수빈','F','010-6008-8839',101);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20190002,'최하준','M','010-2816-9816',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20190003,'장예준','M','010-2243-7741',109);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20190004,'윤시우','M','010-7370-9635',103);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20190005,'박예준','M','010-7686-3445',101);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200001,'이수아','F','010-3223-7097',112);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200002,'최하린','F','010-5861-4281',108);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200003,'윤예은','F','010-6695-8668',130);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200004,'최민준','M','010-8854-6657',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200005,'조예준','M','010-6855-5660',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200006,'임시우','M','010-2948-4303',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200007,'정지안','F','010-3473-1728',115);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200008,'이준우','M','010-4307-1863',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200009,'정서윤','F','010-4699-8696',129);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20200010,'최시우','M','010-2528-5973',103);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210001,'윤지안','F','010-2280-3953',101);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210002,'윤소윤','F','010-2833-7814',105);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210003,'박준우','M','010-2622-5405',120);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210004,'이지윤','F','010-5970-9387',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210005,'임도윤','M','010-1116-7770',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210006,'박수빈','F','010-5474-5515',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210007,'윤도윤','M','010-1194-9203',101);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210008,'조하은','F','010-5036-1336',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210009,'조하린','F','010-1239-3301',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20210010,'이지윤','F','010-1154-7613',118);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220001,'최소윤','F','010-9403-5529',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220002,'최시우','F','010-4551-1580',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220003,'김민준','M','010-7202-4206',109);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220004,'김수아','F','010-7452-1022',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220005,'임지윤','F','010-6436-5844',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220006,'임하준','M','010-1777-2374',112);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220007,'윤지우','F','010-2865-4736',108);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220008,'김소윤','F','010-7675-4038',108);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220009,'장예은','F','010-9409-1684',130);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20220010,'최지윤','F','010-2542-4572',122);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230001,'임도윤','M','010-3408-6402',130);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230002,'이하은','F','010-8182-6234',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230003,'조수아','F','010-3500-5752',101);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230004,'박예준','M','010-3175-3097',108);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230005,'김지민','F','010-9603-1240',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230006,'장서준','M','010-2770-9935',122);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230007,'윤준우','M','010-5718-3247',114);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230008,'임민준','M','010-9789-7580',122);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230009,'조예은','F','010-8039-7638',117);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20230010,'강소윤','F','010-8691-3899',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20240006,'정지윤','F','010-5043-6142',102);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20240007,'박소윤','F','010-3402-4826',121);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20240008,'박민준','M','010-3646-8723',122);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20240009,'박서준','F','010-9771-2053',114);
+Insert into "STUDENT" ("STUDENT_ID", "NAME","GENDER","CONTACT_NUMBER","DEPARTMENT_ID") values (20240010,'강시우','M','010-4723-1619',112);
+--------------------------------------------------------
+--  DDL for Index SYS_C008349
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C008349" ON "DEPARTMENT" ("DEPARTMENT_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index SYS_C008352
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C008352" ON "STUDENT" ("STUDENT_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index SYS_C008355
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C008355" ON "FACILITY" ("FACILITY_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index SYS_C008357
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C008357" ON "RESERVATION" ("RESERVATION_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index SYS_C008361
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C008361" ON "REPORT" ("REPORT_ID") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table FACILITY
+--------------------------------------------------------
+
+  ALTER TABLE "FACILITY" MODIFY ("FACILITY_ID" NOT NULL ENABLE);
+  ALTER TABLE "FACILITY" ADD PRIMARY KEY ("FACILITY_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table REPORT
+--------------------------------------------------------
+
+  ALTER TABLE "REPORT" ADD PRIMARY KEY ("REPORT_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table RESERVATION
+--------------------------------------------------------
+
+  ALTER TABLE "RESERVATION" ADD PRIMARY KEY ("RESERVATION_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table DEPARTMENT
+--------------------------------------------------------
+
+  ALTER TABLE "DEPARTMENT" MODIFY ("DEPARTMENT_NAME" NOT NULL ENABLE);
+  ALTER TABLE "DEPARTMENT" ADD PRIMARY KEY ("DEPARTMENT_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table STUDENT
+--------------------------------------------------------
+
+  ALTER TABLE "STUDENT" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "STUDENT" ADD CHECK (GENDER IN ('M', 'F')) ENABLE;
+  ALTER TABLE "STUDENT" ADD PRIMARY KEY ("STUDENT_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MANAGEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "MANAGEMENT" ADD FOREIGN KEY ("FACILITY_ID")
+	  REFERENCES "FACILITY" ("FACILITY_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FACILITY
+--------------------------------------------------------
+
+  ALTER TABLE "FACILITY" ADD FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table RESERVATION
+--------------------------------------------------------
+
+  ALTER TABLE "RESERVATION" ADD FOREIGN KEY ("STUDENT_ID")
+	  REFERENCES "STUDENT" ("STUDENT_ID") ENABLE;
+  ALTER TABLE "RESERVATION" ADD FOREIGN KEY ("FACILITY_ID")
+	  REFERENCES "FACILITY" ("FACILITY_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table STUDENT
+--------------------------------------------------------
+
+  ALTER TABLE "STUDENT" ADD FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FACILITY
+--------------------------------------------------------      
+ ALTER TABLE FACILITY
+    ADD TOTAL_RESERVATIONS NUMBER DEFAULT 0 NOT NULL;
+--------------------------------------------------------
+--  Ref Constraints for Table RESERVATION
+--------------------------------------------------------
+ALTER TABLE RESERVATION
+ADD CONSTRAINT unique_facility_reservation
+UNIQUE (FACILITY_ID, RESERVATION_DATE, START_TIME);
+
+ALTER TABLE RESERVATION
+MODIFY RESERVATION_ID VARCHAR2(50 BYTE);

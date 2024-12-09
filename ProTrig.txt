@@ -1,0 +1,330 @@
+--------------------------------------------------------
+--  Procedure 1
+--------------------------------------------------------
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE sort_facilities IS
+CURSOR facility_cursor IS
+    SELECT f.FACILITY_ID, f.FACILITY_NAME, COUNT(r.RESERVATION_ID) AS reservation_count
+    FROM FACILITY f
+    JOIN RESERVATION r ON f.FACILITY_ID = r.FACILITY_ID
+    GROUP BY f.FACILITY_ID, f.FACILITY_NAME
+    ORDER BY reservation_count DESC;
+BEGIN
+    FOR facility_record IN facility_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE('Facility ID: ' || facility_record.FACILITY_ID ||
+                             ', Facility Name: ' || facility_record.FACILITY_NAME ||
+                             ', Reservations: ' || facility_record.reservation_count);
+    END LOOP;
+END;
+
+EXECUTE sort_facilities;
+
+--------------------------------------------------------
+--  Procedure 2
+--------------------------------------------------------
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE reserve_facility (
+    p_student_id IN NUMBER,
+    p_facility_id IN NUMBER,
+    p_reservation_date IN DATE,
+    p_reservation_time IN NUMBER
+) IS
+    v_facility_capacity NUMBER;
+    v_available_start_time NUMBER;
+    v_available_end_time NUMBER;
+    v_existing_reservations NUMBER;
+    v_reservation_id VARCHAR2(50);
+BEGIN
+    -- 디버깅용 출력
+    DBMS_OUTPUT.PUT_LINE('입력 값 확인: 학생 ID = ' || p_student_id || 
+                         ', 시설 ID = ' || p_facility_id || 
+                         ', 예약 날짜 = ' || TO_CHAR(p_reservation_date, 'YYYY-MM-DD') || 
+                         ', 예약 시간 = ' || p_reservation_time);
+
+    -- 시설 번호가 유효한지 확인
+    SELECT COUNT(*)
+    INTO v_existing_reservations
+    FROM FACILITY
+    WHERE FACILITY_ID = p_facility_id;
+
+    IF v_existing_reservations = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, '유효하지 않은 시설 번호입니다.');
+    END IF;
+
+    -- 시설의 정보 확인 (수용 인원 및 사용 가능 시간)
+    SELECT CAPACITY, AVAILABLE_START_TIME, AVAILABLE_END_TIME
+    INTO v_facility_capacity, v_available_start_time, v_available_end_time
+    FROM FACILITY
+    WHERE FACILITY_ID = p_facility_id;
+
+    -- 디버깅용 출력
+    DBMS_OUTPUT.PUT_LINE('시설 확인: 수용 인원 = ' || v_facility_capacity || 
+                         ', 사용 가능 시간 = ' || v_available_start_time || 
+                         ' ~ ' || v_available_end_time);
+
+    -- 예약 시간이 시설의 사용 가능 시간 내에 있는지 확인
+    IF p_reservation_time < v_available_start_time OR p_reservation_time > v_available_end_time THEN
+        RAISE_APPLICATION_ERROR(-20002, '예약 시간이 사용 가능 시간을 초과했습니다.');
+    END IF;
+
+    -- 동일 시간대 예약 수 확인 (시간 겹침 확인 추가)
+    SELECT COUNT(*)
+    INTO v_existing_reservations
+    FROM RESERVATION
+    WHERE FACILITY_ID = p_facility_id
+      AND RESERVATION_DATE = p_reservation_date
+      AND (
+             (p_reservation_time BETWEEN START_TIME AND END_TIME) -- 새 예약이 기존 예약 범위에 속함
+          OR (START_TIME BETWEEN p_reservation_time AND p_reservation_time + 1) -- 기존 예약이 새 예약 범위에 속함
+      );
+
+    -- 예약 가능 여부 확인
+    IF v_existing_reservations >= v_facility_capacity THEN
+        RAISE_APPLICATION_ERROR(-20003, '시설 예약이 모두 마감되었습니다.');
+    END IF;
+
+    -- 고유한 예약 ID 생성
+   v_reservation_id := 'P' || p_facility_id || 
+                        TO_CHAR(p_reservation_date, 'YYYY-MM-DD') || 
+                        TO_CHAR(p_reservation_time, 'FM00');
+    DBMS_OUTPUT.PUT_LINE('예약 ID 생성: ' || v_reservation_id);
+
+    -- 예약 삽입
+    INSERT INTO RESERVATION (
+        STUDENT_ID, FACILITY_ID, RESERVATION_ID, RESERVATION_DATE, START_TIME, END_TIME
+    ) VALUES (
+        p_student_id, p_facility_id, v_reservation_id, p_reservation_date, 
+        p_reservation_time, p_reservation_time + 1 -- 예약 시간: 1시간 기본
+    );
+
+    COMMIT;
+
+    -- 성공 메시지 출력
+    DBMS_OUTPUT.PUT_LINE('예약 성공. 예약 번호: ' || v_reservation_id);
+
+EXCEPTION
+    WHEN DUP_VAL_ON_INDEX THEN
+        -- UNIQUE 제약 조건 위반 시 사용자 정의 에러 메시지 출력
+        RAISE_APPLICATION_ERROR(-20004, '중복된 예약이 존재합니다. 다른 시간대를 선택하세요.');
+    WHEN OTHERS THEN
+        -- 기타 오류 발생 시 롤백
+        ROLLBACK;
+        -- 디버깅용 출력
+        DBMS_OUTPUT.PUT_LINE('오류 발생: ' || SQLERRM);
+        RAISE;
+END;
+
+-- 실행 성공
+BEGIN
+    reserve_facility(
+        p_student_id => 20240009,                    
+        p_facility_id => 55,                        
+        p_reservation_date => TO_DATE('24/12/07', 'RR/MM/DD'), 
+        p_reservation_time => 19                  
+    );
+END;
+
+-- 확인
+SELECT * FROM RESERVATION;
+
+-- 실행 오류
+BEGIN
+    reserve_facility(
+        p_student_id => 20210005,                    
+        p_facility_id => 88,                        
+        p_reservation_date => TO_DATE('24/12/07', 'RR/MM/DD'), 
+        p_reservation_time => 18                  
+    );
+END;
+
+-- 사용 가능 시간 초과
+BEGIN
+    reserve_facility(
+        p_student_id => 20210005,
+        p_facility_id => 12,
+        p_reservation_date => TO_DATE('2024-12-09', 'YYYY-MM-DD'),
+        p_reservation_time => 24 -- 사용 가능 시간을 초과한 시간
+    );
+END;
+
+-- 예약 데이터 추가로 시설을 마감 상태로 설정
+INSERT INTO RESERVATION (STUDENT_ID, FACILITY_ID, RESERVATION_ID, RESERVATION_DATE,START_TIME,END_TIME)
+VALUES (20190004, 6, 'P552024-12-0910', TO_DATE('2024-12-09', 'YYYY-MM-DD'), 10, 11);
+
+BEGIN
+    reserve_facility(
+        p_student_id => 20240008,
+        p_facility_id => 6,
+        p_reservation_date => TO_DATE('2024-12-09', 'YYYY-MM-DD'),
+        p_reservation_time => 10 -- 이미 예약 마감 상태
+    );
+END;
+
+--------------------------------------------------------
+-- Trigger 1
+--------------------------------------------------------
+SET SERVEROUTPUT ON;
+
+-- 트리거 구현을 위한 시설 예약 횟수 테이블 생성
+CREATE TABLE FACILITY_RESERVATION_COUNT (
+    FACILITY_ID NUMBER PRIMARY KEY,
+    RESERVATION_COUNT NUMBER DEFAULT 0
+);
+
+INSERT INTO FACILITY_RESERVATION_COUNT (FACILITY_ID, RESERVATION_COUNT)
+SELECT FACILITY_ID, 0
+FROM FACILITY;
+
+COMMIT;
+
+-- 트리거 실행
+CREATE OR REPLACE TRIGGER update_res_count
+AFTER INSERT OR DELETE OR UPDATE OF FACILITY_ID ON RESERVATION
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        -- INSERT 시 예약 수 증가
+        UPDATE FACILITY_RESERVATION_COUNT
+        SET RESERVATION_COUNT = RESERVATION_COUNT + 1
+        WHERE FACILITY_ID = :NEW.FACILITY_ID;
+    ELSIF DELETING THEN
+        -- DELETE 시 예약 수 감소
+        UPDATE FACILITY_RESERVATION_COUNT
+        SET RESERVATION_COUNT = RESERVATION_COUNT - 1
+        WHERE FACILITY_ID = :OLD.FACILITY_ID;
+    ELSIF UPDATING AND :NEW.FACILITY_ID != :OLD.FACILITY_ID THEN
+        -- UPDATE 시 이전 FACILITY_ID는 감소, 새로운 FACILITY_ID는 증가
+        UPDATE FACILITY_RESERVATION_COUNT
+        SET RESERVATION_COUNT = RESERVATION_COUNT - 1
+        WHERE FACILITY_ID = :OLD.FACILITY_ID;
+
+        UPDATE FACILITY_RESERVATION_COUNT
+        SET RESERVATION_COUNT = RESERVATION_COUNT + 1
+        WHERE FACILITY_ID = :NEW.FACILITY_ID;
+    END IF;
+END;
+
+-- 삽입 예제
+INSERT INTO RESERVATION (STUDENT_ID, FACILITY_ID, RESERVATION_ID, RESERVATION_DATE, START_TIME, END_TIME)
+VALUES (20240009, 55, 'P552420-12-0719', TO_DATE('2024-12-07', 'YYYY-MM-DD'), 20,21);
+
+SELECT * FROM FACILITY_RESERVATION_COUNT;
+
+-- 삭제 예제
+DELETE FROM RESERVATION
+WHERE RESERVATION_ID = 'P552420-12-0719';
+
+SELECT * FROM FACILITY_RESERVATION_COUNT;
+
+-- 갱신 예제
+INSERT INTO RESERVATION (STUDENT_ID, FACILITY_ID, RESERVATION_ID, RESERVATION_DATE, START_TIME, END_TIME)
+VALUES (20240009, 55, 'P552420-12-1011', TO_DATE('2024-12-10', 'YYYY-MM-DD'), 11,12);
+
+UPDATE RESERVATION
+SET FACILITY_ID = 6
+WHERE RESERVATION_ID = 'P552420-12-1011';
+
+SELECT * FROM FACILITY_RESERVATION_COUNT;
+
+--------------------------------------------------------
+-- Trigger 2
+--------------------------------------------------------
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER report_management
+AFTER INSERT OR DELETE OR UPDATE ON REPORT
+FOR EACH ROW
+DECLARE
+    v_facility_id NUMBER;
+BEGIN
+    -- 삽 : 새로운 고장 신고가 들어올 때
+    IF INSERTING THEN
+        SELECT FACILITY_ID
+        INTO v_facility_id
+        FROM RESERVATION
+        WHERE RESERVATION_ID = :NEW.RESERVATION_ID;
+
+        -- 관리 기록 추가
+        INSERT INTO MANAGEMENT (FACILITY_ID, "DATE", MANAGER)
+        VALUES (v_facility_id, SYSDATE, 'System Generated');
+
+        -- 시설 상태를 "점검 중"으로 업데이트
+        UPDATE FACILITY
+        SET USAGE_GUIDELINES = '점검 중'
+        WHERE FACILITY_ID = v_facility_id;
+
+        -- 알림 메시지
+        DBMS_OUTPUT.PUT_LINE('관리 기록이 추가되었으며, 시설(' || v_facility_id || ')이 점검 중으로 표시되었습니다.');
+    END IF;
+
+    -- 삭 : 고장 신고가 삭제될 때
+    IF DELETING THEN
+        SELECT FACILITY_ID
+        INTO v_facility_id
+        FROM RESERVATION
+        WHERE RESERVATION_ID = :OLD.RESERVATION_ID;
+
+        -- 관리 기록 삭제
+        DELETE FROM MANAGEMENT
+        WHERE FACILITY_ID = v_facility_id
+          AND "DATE" = (SELECT MAX("DATE") 
+                        FROM MANAGEMENT 
+                        WHERE FACILITY_ID = v_facility_id);
+
+        -- 시설 상태를 기본값("사용 가능")으로 복원
+        UPDATE FACILITY
+        SET USAGE_GUIDELINES = '사용 가능'
+        WHERE FACILITY_ID = v_facility_id;
+
+        -- 알림 메시지
+        DBMS_OUTPUT.PUT_LINE('관리 기록이 삭제되었으며, 시설(' || v_facility_id || ')이 사용 가능 상태로 복원되었습니다.');
+    END IF;
+
+    -- 갱 : 고장 신고 상태가 변경될 때
+    IF UPDATING THEN
+        IF :NEW.PROCESSING_STATUS = 'Completed' THEN
+            SELECT FACILITY_ID
+            INTO v_facility_id
+            FROM RESERVATION
+            WHERE RESERVATION_ID = :NEW.RESERVATION_ID;
+
+            -- 시설 상태를 "사용 가능"으로 업데이트
+            UPDATE FACILITY
+            SET USAGE_GUIDELINES = '사용 가능'
+            WHERE FACILITY_ID = v_facility_id;
+
+            -- 알림 메시지
+            DBMS_OUTPUT.PUT_LINE('점검이 완료되어 시설(' || v_facility_id || ')이 사용 가능 상태로 복원되었습니다.');
+        END IF;
+    END IF;
+END;
+
+-- 삽입 예제
+INSERT INTO REPORT (RESERVATION_ID, REPORT_ID, REPORT_CONTENT, PROCESSING_STATUS)
+VALUES ('P552024-12-0910', 135, '책상이 부서져있습니다.', '처리 대기');
+
+COMMIT;
+
+-- 삭제 예제
+DELETE FROM REPORT
+WHERE REPORT_ID = 135;
+
+COMMIT;
+
+-- 갱신 예제
+INSERT INTO REPORT (RESERVATION_ID, REPORT_ID, REPORT_CONTENT, PROCESSING_STATUS)
+VALUES ('P552024-12-0910', 135, '책상이 부서져있습니다.', '처리 대기');
+
+UPDATE REPORT
+SET PROCESSING_STATUS = '처리 완료'
+WHERE REPORT_ID = 135;
+
+COMMIT;
+
+
+DROP PROCEDURE sort_facilities;
+DROP PROCEDURE reserve_facility;
+DROP TRIGGER update_res_count;
+DROP TRIGGER report_management;
